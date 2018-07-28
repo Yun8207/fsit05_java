@@ -1,0 +1,30 @@
+package tw.org.iii.mytest;
+
+public class PokerV3 {
+
+	public static void main(String[] args) {
+		int[] poker = new int [52];
+		boolean isRepeat;
+		int temp;
+		for (int i=0; i<poker.length; i++) {
+			poker[i] = i+1;
+			do {
+				temp = (int)(Math.random()*52);
+				
+				//verifier
+				isRepeat = false;
+				for (int j=0; j<i; j++) {
+					if(poker[j] == temp) {
+						isRepeat = true;
+						break;
+					}
+				}
+			}while(isRepeat);
+
+			//poker[i] = temp;
+			System.out.println(poker[i]);
+			
+		}
+	}
+
+}
