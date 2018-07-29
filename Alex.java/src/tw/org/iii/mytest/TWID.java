@@ -2,22 +2,46 @@ package tw.org.iii.mytest;
 
 public class TWID {
 	private String id;
-	
+	static final String letters = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
 	
 	TWID(){
-		
+		this((int)(Math.random()*2)==0);
 	}
 	
 	TWID(boolean isMale){
-		
+		this(isMale, (int)(Math.random()*26));
 	}
 	
 	TWID(int area){
-		
+		this((int)(Math.random()*2)==0,area);
 	}
 	
 	TWID(boolean isMale, int area){
-		
+		String i1 = letters.substring(area, area+1);
+		String i2 = isMale?"1":"2";
+//		String newid = i1 + i2 + 
+//				(int)(Math.random()*10) +
+//				(int)(Math.random()*10) +
+//				(int)(Math.random()*10) +
+//				(int)(Math.random()*10) +
+//				(int)(Math.random()*10) +
+//				(int)(Math.random()*10) +
+//				(int)(Math.random()*10);
+//				
+		String newid = i1.concat(i2)
+				.concat(String.valueOf((int)(Math.random()*10)))
+				.concat(String.valueOf((int)(Math.random()*10)))
+				.concat(String.valueOf((int)(Math.random()*10)))
+				.concat(String.valueOf((int)(Math.random()*10)))	
+				.concat(String.valueOf((int)(Math.random()*10)))
+				.concat(String.valueOf((int)(Math.random()*10)))
+				.concat(String.valueOf((int)(Math.random()*10)));
+		for (int i=0; i<=9; i++) {
+			if(checkID(newid+i)) {
+				this.id = newid+i;
+				break;
+			}
+		}
 	}
 	
 	TWID(String id){
@@ -51,7 +75,7 @@ public class TWID {
 	static boolean checkID(String id) {
 		boolean isRight = false;
 		if (id.matches("^[A-Z][12][0-9]{8}$")) {
-			String letters = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+			
 			int n12 = letters.indexOf(id.charAt(0)) +10;
 			int n1 = n12/10;
 			int n2 = n12%10;
@@ -69,6 +93,16 @@ public class TWID {
 		}
 		return isRight;
 	}
+	
+	String getID() {return id;}
+	
+	boolean isMale() {
+		return (id.substring(1,2)=="1");
+	}
+	
+//	String getArea() {
+//		
+//	}
 	
 	
 	

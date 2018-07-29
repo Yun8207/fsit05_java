@@ -16,11 +16,24 @@ public class Alex22 {
 //		}
 		
 		
-		if(TWID.checkID("A123456789")) {
-			System.out.println("OK");
-		}else {
-			System.out.println("XX");
-		}
+		TWID id1 = new TWID();
+		TWID id2 = new TWID(true);
+		TWID id3 = new TWID(14);
+		TWID id4 = new TWID(false, 17);
+		TWID id5 = TWID.createTWID("A123456789");
+		System.out.println(id1.getID()+id1.isMale());
+		System.out.println(id2.getID()+id1.isMale());
+		System.out.println(id3.getID());
+		System.out.println(id4.getID());
+		System.out.println(id5.getID());
+		
+		
+		
+//		if(TWID.checkID("A123456789")) {
+//			System.out.println("OK");
+//		}else {
+//			System.out.println("XX");
+//		}
 
 	}
 
