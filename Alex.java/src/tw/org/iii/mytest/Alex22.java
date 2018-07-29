@@ -14,7 +14,7 @@ public class Alex22 {
 //		}else {
 //			System.out.println("XX");
 //		}
-		
+		//
 		
 		if(TWID.checkID("A123456789")) {
 			System.out.println("OK");
