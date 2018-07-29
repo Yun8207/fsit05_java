@@ -89,7 +89,7 @@ public class TWID {
 			int n10 = Integer.parseInt(id.substring(8, 9));
 			int n11 = Integer.parseInt(id.substring(9, 10));
 			int sum = n1*1+n2*9+n3*8+n4*7+n5*6+n6*5+n7*4+n8*3+n9*2+n10*1+n11*1;
-			isRight = sum % 10 ==0;//
+			isRight = sum % 10 ==0;
 		}
 		return isRight;
 	}
