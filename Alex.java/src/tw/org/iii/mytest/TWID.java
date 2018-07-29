@@ -20,6 +20,18 @@ public class TWID {
 		
 	}
 	
+	TWID(String id){
+		this.id = id;
+	}
+	
+	static TWID createTWID(String id) {
+		if(checkID(id)) {
+			return new TWID(id);
+		}else {
+			return null;
+		}
+	}
+	
 //	static boolean checkID(String id) {
 //		String c1 = id.substring(0, 1);
 //		String c2 = "ABCDEFGHIJKLMNOPRSTUVWXYZ";
