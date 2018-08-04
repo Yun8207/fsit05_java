@@ -67,7 +67,7 @@ public class TWID {
 //		return true;
 //		}else {
 //			return false;
-//		}/
+//		}
 //		
 //		
 //	}
@@ -97,7 +97,7 @@ public class TWID {
 	String getID() {return id;}
 	
 	boolean isMale() {
-		return (id.substring(1,2)=="1");
+		return id.substring(1, 2).equals("1");
 	}
 	
 //	String getArea() {

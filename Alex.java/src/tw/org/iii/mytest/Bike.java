@@ -2,7 +2,7 @@ package tw.org.iii.mytest;
 //import except java.lang
 
 public class Bike {
-	private double speed;//public protected "null" private
+	double speed;//public protected "null" private
 	
 	Bike(){
 		speed = 0;
