@@ -69,7 +69,7 @@ public class GuessNumber extends JFrame {
 		}
 		
 		
-		if(Isnumb == true) {
+		if(Isnumb == true && text.length()<4) {
 				counter++;
 				String result = checkAB();
 				hist.append(counter + ". " + input.getText() + " => " + result + "\n");
