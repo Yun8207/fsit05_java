@@ -1,11 +1,13 @@
 package tw.org.iii.mytest;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -14,6 +16,8 @@ public class GuessNumber extends JFrame {
 	private JButton guess;
 	private JTextField input;
 	private JTextArea hist;
+	private String answer =  createAnswer();
+	private int counter;
 	
 	public GuessNumber() {
 		super("Guess Number Game");
@@ -25,6 +29,8 @@ public class GuessNumber extends JFrame {
 		setLayout(new BorderLayout());
 		
 		add(hist, BorderLayout.CENTER);
+		input.setFont(new Font("Default", Font.PLAIN, 20)); 
+		hist.setFont(new Font("Default", Font.BOLD + Font.ITALIC, 30)); 
 		
 		JPanel top = new JPanel(new BorderLayout());
 		top.add(input, BorderLayout.CENTER);
@@ -41,16 +47,59 @@ public class GuessNumber extends JFrame {
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+		//System.out.println(answer);
 	}
 	
 	void doGuess() {
+		counter++;
+		String result = checkAB();
+		hist.append(counter + ". " + input.getText() + " => " + result + "\n");
+		input.setText("");
 		
+		
+		if(result.equals("3A0B")) {
+			JOptionPane.showMessageDialog(null,"Congratulation!!");
+		}else if(counter >= 10) {
+			JOptionPane.showMessageDialog(null,"You Lose" + answer);
+		}
+	}
+	
+	String checkAB() {
+		int a, b; a = b = 0;
+		String inputGuess = input.getText();
+		for (int i = 0; i < inputGuess.length(); i++) {
+			if (inputGuess.charAt(i) == answer.charAt(i)) {
+				a++;
+			}else if(answer.indexOf(inputGuess.charAt(i)) != -1 ) {
+				b++;
+			}
+		}
+		return a +"A" + b + "B";
+	}
+	
+	String createAnswer() {
+		int a, b, c;
+		//a = String.valueOf((int)(Math.random()*10));
+		a = (int)(Math.random()*10);
+		b = (int)(Math.random()*10);
+		c = (int)(Math.random()*10);
+		while(a ==b) {
+			b = (int)(Math.random()*10);
+			while(b==c) {
+				c = (int)(Math.random()*10);
+			}
+		}
+		
+		return ""+ a + b + c;
 	}
 	
 	public static void main(String[] args) {
 		new GuessNumber();
-
+		
 	}
 
 }
+
+//don't have to click on textbox again after guessing or mouse move to text autoly
+//can't guess if "NAME" "ABCDEFG"
+//reopen game after notice
