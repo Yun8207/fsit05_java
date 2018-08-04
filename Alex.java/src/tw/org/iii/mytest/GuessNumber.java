@@ -18,6 +18,7 @@ public class GuessNumber extends JFrame {
 	private JTextArea hist;
 	private String answer =  createAnswer();
 	private int counter;
+	private String word = "0123456789" ;
 	
 	public GuessNumber() {
 		super("Guess Number Game");
@@ -40,7 +41,9 @@ public class GuessNumber extends JFrame {
 		guess.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//if(word.indexOf(input.getText()) == -1) {
 				doGuess();
+				//}
 			}
 		});
 		
