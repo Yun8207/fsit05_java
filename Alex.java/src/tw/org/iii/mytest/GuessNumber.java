@@ -41,9 +41,10 @@ public class GuessNumber extends JFrame {
 		guess.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if(word.indexOf(input.getText()) == -1) {
+				
+				
 				doGuess();
-				//}
+				
 			}
 		});
 		
@@ -51,20 +52,38 @@ public class GuessNumber extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//System.out.println(answer);
+		
 	}
 	
 	void doGuess() {
-		counter++;
-		String result = checkAB();
-		hist.append(counter + ". " + input.getText() + " => " + result + "\n");
-		input.setText("");
-		
-		
-		if(result.equals("3A0B")) {
-			JOptionPane.showMessageDialog(null,"Congratulation!!");
-		}else if(counter >= 10) {
-			JOptionPane.showMessageDialog(null,"You Lose" + answer);
+		input.grabFocus();
+		String text = input.getText();
+		boolean Isnumb = false;
+		for(int i=0; i<text.length(); i++) {
+			if((word.indexOf(text.substring(i, i+1)) != -1)) {
+				Isnumb = true;
+			}else {
+				Isnumb = false;
+				break;
+			}
 		}
+		
+		
+		if(Isnumb == true && text.length()<4) {
+				counter++;
+				String result = checkAB();
+				hist.append(counter + ". " + input.getText() + " => " + result + "\n");
+				System.out.println(input.getText());
+				input.setText("");
+				if(result.equals("3A0B")) {
+					JOptionPane.showMessageDialog(null,"Congratulation!!");
+				}else if(counter >= 10) {
+					JOptionPane.showMessageDialog(null,"You Lose" + answer);
+				}
+		}
+		
+		
+		
 	}
 	
 	String checkAB() {
@@ -103,6 +122,6 @@ public class GuessNumber extends JFrame {
 
 }
 
-//don't have to click on textbox again after guessing or mouse move to text autoly
+//don't have to click on textbox again after guessing or mouse move to text automatically
 //can't guess if "NAME" "ABCDEFG"
 //reopen game after notice
