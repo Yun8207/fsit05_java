@@ -73,6 +73,11 @@ public class GuessNumber extends JFrame {
 				counter++;
 				String result = checkAB();
 				hist.append(counter + ". " + input.getText() + " => " + result + "\n");
+<<<<<<< HEAD
+=======
+				
+				System.out.println(word.indexOf(input.getText()));
+>>>>>>> refs/remotes/origin/master
 				System.out.println(input.getText());
 				input.setText("");
 				if(result.equals("3A0B")) {
