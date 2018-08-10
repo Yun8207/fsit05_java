@@ -12,16 +12,20 @@ import javax.swing.JPanel;
 public class MyPanel extends JPanel {
 	public MyPanel() {
 		System.out.println("MyPanel()");
-//		class MListener extends MouseAdapter {
-//			public void mousePressed(MouseEvent e) {
-//				repaint();
-//			}
-//			
-//		}
+		MListener myListener = new MListener();
+		addMouseListener(myListener);
 		
 		
 	}
 	
+
+	
+	 class MListener extends MouseAdapter {
+		public void mousePressed(MouseEvent e) {
+			repaint();
+		}
+		
+	}
 	
 	
 	@Override
@@ -39,7 +43,7 @@ public class MyPanel extends JPanel {
 		System.out.println("paint");
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(Color.RED);
-		g2d.fillOval((int)(Math.random()*100), 0, 240, 240);
+		g2d.fillOval((int)(Math.random()*100), 0, 80, 80);
 	}
 	
 }
