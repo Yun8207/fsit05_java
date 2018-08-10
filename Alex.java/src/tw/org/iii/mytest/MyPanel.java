@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
+	private int mx = 40;
+	private int my = 40;
 	public MyPanel() {
 		System.out.println("MyPanel()");
 		MListener myListener = new MListener();
@@ -22,6 +24,8 @@ public class MyPanel extends JPanel {
 	
 	 class MListener extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
+			mx = e.getX();
+			my = e.getY();
 			repaint();
 		}
 		
@@ -43,7 +47,7 @@ public class MyPanel extends JPanel {
 		System.out.println("paint");
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(Color.RED);
-		g2d.fillOval((int)(Math.random()*100), 0, 80, 80);
+		g2d.fillOval(mx-40, my-40, 80, 80);
 	}
 	
 }
