@@ -11,12 +11,12 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 public class Alex38 extends JFrame{
-	private MyPanel myPanel;
+	private MyPanelV3 myPanel;
 	public Alex38() {
 		
 		setLayout(new BorderLayout());
 		
-		myPanel = new MyPanel();
+		myPanel = new MyPanelV3();
 		add(myPanel, BorderLayout.CENTER);
 		addWindowListener(new MyListener());
 		
