@@ -19,7 +19,7 @@ public class MyPanel extends JPanel {
 		
 		
 	}
-	
+	//
 
 	
 	 class MListener extends MouseAdapter {
