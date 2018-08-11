@@ -29,7 +29,7 @@ public class MyPanel extends JPanel {
 			repaint();
 		}
 		
-	}
+	}//
 	
 	
 	@Override
