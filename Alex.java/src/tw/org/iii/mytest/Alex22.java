@@ -2,7 +2,7 @@ package tw.org.iii.mytest;
 
 public class Alex22 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		/*TWID.checkID("aa");//1
 		
 		TWID id1 = new TWID();//2

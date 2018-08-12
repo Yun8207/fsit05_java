@@ -57,6 +57,25 @@ public class MyEditor extends JFrame {
 			}
 		});
 		
+		saveas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				saveAs();
+				
+			}
+		});
+		
+		newfile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				clear();
+			}
+		});
+		
+		
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -71,9 +90,19 @@ public class MyEditor extends JFrame {
 			} catch (IOException e) {
 				System.out.println(e);
 			}
+		}else {
+			saveAs();
 		}
 		
 	}
+	private void saveAs() {
+		JFileChooser jFileChooser = new JFileChooser();
+		if(jFileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			nowFile = jFileChooser.getSelectedFile();
+			saveFile();
+		}
+	}
+	
 	
 	private void openFile() {
 		JFileChooser jFileChooser = new JFileChooser();
@@ -85,6 +114,11 @@ public class MyEditor extends JFrame {
 				nowFile = null;
 			}
 		}
+	}
+	
+	private void clear() {
+		nowFile= null;
+		editor.setText("");
 	}
 	
 	private void readFile() {

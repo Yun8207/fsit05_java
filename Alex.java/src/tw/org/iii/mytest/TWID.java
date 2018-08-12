@@ -48,11 +48,12 @@ public class TWID {
 		this.id = id;
 	}
 	
-	static TWID createTWID(String id) {
+	static TWID createTWID(String id) throws Exception {
 		if(checkID(id)) {
 			return new TWID(id);
 		}else {
-			return null;
+			throw new Exception();
+			//return null;
 		}
 	}
 	

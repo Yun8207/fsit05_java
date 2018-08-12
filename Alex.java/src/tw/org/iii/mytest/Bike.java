@@ -1,7 +1,9 @@
 package tw.org.iii.mytest;
 //import except java.lang
 
-public class Bike {
+import java.io.Serializable;
+
+public class Bike implements Serializable {
 	double speed;//public protected "null" private
 	
 	Bike(){
