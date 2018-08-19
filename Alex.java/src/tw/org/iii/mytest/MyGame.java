@@ -42,7 +42,7 @@ public class MyGame extends JFrame {
 		public GamePanel() {
 			timer = new Timer();
 			try {
-				ball = ImageIO.read(new File("dir1/ball.png.png"));
+				ball = ImageIO.read(new File("dir1/ball.png"));
 				ballW = ball.getWidth(); ballH = ball.getHeight();
 			} catch (IOException e) {
 				
