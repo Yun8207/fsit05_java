@@ -1,12 +1,18 @@
 package tw.org.iii.mytest;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Racing extends JFrame {
 	private JButton go;
@@ -17,8 +23,13 @@ public class Racing extends JFrame {
 	public Racing() {
 		super();
 		setLayout(new GridLayout(9,0));
+		//private AbstractClock dClock;//download github
 		
+		
+		JPanel top = new JPanel(new BorderLayout());
 		go = new JButton("Go!"); add(go);
+		top.add(go, BorderLayout.CENTER);
+		
 		for (int i=0; i<lanes.length; i++) {
 			lanes[i] = new JLabel((i+1) + ".");
 			add(lanes[i]);
