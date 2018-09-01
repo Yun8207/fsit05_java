@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Properties;
@@ -18,7 +20,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class JDBC12 extends JFrame {
 	private JTable jTable;
-	private LinkedList<HashMap<String, String>> data;
+	private int dataCount;
+	private String[] fields;
+	private ResultSet rs;
+	private Connection conn;
 	
 	
 	
@@ -40,30 +45,39 @@ public class JDBC12 extends JFrame {
 	}
 	
 	private void initData() {
-		data = new LinkedList<>();
+
 		
 		String url = "jdbc:mysql://localhost/iii";
 		Properties prop = new Properties();
 		prop.setProperty("user", "root");
 		prop.setProperty("password", "root");
 		
-		String query = "SELECT * FROM cust";
+		String query = "SELECT * FROM gifts";
 		
- 		try (Connection conn = DriverManager.getConnection(url,prop);){
-			PreparedStatement pstmt = conn.prepareStatement(query);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				String f1 = rs.getString("id");
-				String f2 = rs.getString("name");
-				String f3 = rs.getString("tel");
-				String f4 = rs.getString("birthday");
-				HashMap<String, String> row = new HashMap<>();
-				row.put("id",  f1);
-				row.put("name", f2);
-				row.put("tel", f3);
-				row.put("birthday", f4);
-				data.add(row);
+ 		try {
+ 			conn = DriverManager.getConnection(url,prop);
+ 			
+ 			
+			PreparedStatement pstmt0 = conn.prepareStatement("SELECT count(*) as count FROM gifts");
+			ResultSet rs0 = pstmt0.executeQuery();
+			rs0.next();
+			dataCount = rs0.getInt("count");
+			
+			PreparedStatement pstmt = conn.prepareStatement(query,ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+			rs = pstmt.executeQuery();
+			
+			ResultSetMetaData metadata = rs.getMetaData();
+			fields = new String[metadata.getColumnCount()];
+			for (int i=0; i<fields.length; i++) {
+				fields[i] = metadata.getColumnLabel(i+1);
 			}
+//			String sql ="SELECT * FROM gifts";
+//			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+//			rs = stmt.executeQuery(sql);
+//			rs.next();
+//			System.out.println(rs.getString("account")+ ":" +rs.getString("realname"));
+//			rs.updateString("realname", "Eric Chen");
+//			rs.updateRow();
 
 		}catch(SQLException e) {
 			System.out.println(e);
@@ -76,37 +90,29 @@ public class JDBC12 extends JFrame {
 		@Override
 		public int getRowCount() {
 			// TODO Auto-generated method stub
-			return data.size();
+			return dataCount;
 		}
 		@Override
 		public int getColumnCount() {
-			return 4;
+			return fields.length;
 			//return super.getColumnCount();
 		}
 		
 		@Override
 		public String getColumnName(int column) {
-			String ret = "";
-			switch (column) {
-			case 0: ret= "id"; break;
-			case 1: ret= "name"; break;
-			case 2: ret= "tel"; break;
-			case 3: ret= "birthday"; break;
-			}
-			return ret;
+			return fields[column];
 		}
 		
 		@Override
 		public Object getValueAt(int row, int column) {
-			String ret = "";
-			switch (column) {
-			case 0: ret= data.get(row).get("id"); break;
-			case 1: ret= data.get(row).get("name"); break;
-			case 2: ret= data.get(row).get("tel"); break;
-			case 3: ret= data.get(row).get("birthday"); break;
+			try {
+				System.out.println(row);
+				rs.absolute(row+1);
+				return rs.getString(fields[column]);
+			} catch (SQLException e) {
+				return "---";
 			}
-			return ret;
-			//return super.getValueAt(row, column);
+			
 		}
 	}
 	
