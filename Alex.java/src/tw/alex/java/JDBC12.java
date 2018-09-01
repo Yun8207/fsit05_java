@@ -34,7 +34,7 @@ public class JDBC12 extends JFrame {
 		
 		initData();
 		jTable = new JTable(new MyTableModel());
-		jTable.setFont(new Font("", Font.BOLD, 16));
+		jTable.setFont(new Font("", Font.PLAIN, 16));
 		JScrollPane jsp = new JScrollPane(jTable);
 		add(jsp, BorderLayout.CENTER);
 		
@@ -52,7 +52,7 @@ public class JDBC12 extends JFrame {
 		prop.setProperty("user", "root");
 		prop.setProperty("password", "root");
 		
-		String query = "SELECT * FROM gifts";
+		String query = "SELECT id, name as '名稱', feature as '特色' , place as '購買地點' FROM gifts";
 		
  		try {
  			conn = DriverManager.getConnection(url,prop);
@@ -106,7 +106,6 @@ public class JDBC12 extends JFrame {
 		@Override
 		public Object getValueAt(int row, int column) {
 			try {
-				System.out.println(row);
 				rs.absolute(row+1);
 				return rs.getString(fields[column]);
 			} catch (SQLException e) {
@@ -114,6 +113,27 @@ public class JDBC12 extends JFrame {
 			}
 			
 		}
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			
+			return fields[column].equals("id")?false:true;
+		}
+		@Override
+		public void setValueAt(Object aValue, int row, int column) {
+			
+			super.setValueAt(aValue, row, column);
+			try {
+				rs.absolute(row+1);
+				rs.updateString(fields[column], (String)aValue);
+				rs.updateRow();
+				
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+			
+		}
+		
+		
 	}
 	
 	
